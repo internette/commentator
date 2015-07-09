@@ -7,12 +7,12 @@ App.info({
 	website: 'http://acjdesigns.com'
 });
 App.icons({
-	'iphone': 'images/icons/icon-6.png',
-	'iphone_2x': 'images/icons/icon-6.png',
-	'iphone_3x': 'images/icons/icon-6plus.png'
+	'iphone': 'public/images/icons/icon-6.png',
+	'iphone_2x': 'public/images/icons/icon-6.png',
+	'iphone_3x': 'public/images/icons/icon-6plus.png'
 });
 App.launchScreens({
-	'iphone': 'images/launchscreen/iphone5-launch.png',
-	'iphone_2x': 'images/launchscreen/iphone6-launch.png',
-	'iphone_3x': 'images/launchscreen/iphone6plus-launch.png'
+	'iphone': 'public/images/launchscreen/iphone5-launchscreen.png',
+	'iphone_2x': 'public/images/launchscreen/iphone6-launch.png',
+	'iphone6': 'public/images/launchscreen/iphone6-launch.png'
 });

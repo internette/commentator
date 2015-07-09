@@ -8,24 +8,36 @@
 
 <template name="layout">
 	{{> accountbtns}}
+	<div class="transitions-container" style="height:100%">
 		{{> yield}}
+	</div>
 	{{> footer}}
 </template>
+<template name="landinglayout">
+	<div class="transitions-container" style="background:#9fcd50;height:100%">
+		{{> yield}}
+	</div>
+</template>
 <template name="landing">
+<div class="transition-content">
 	<div class="form-style">
 		<div class="button-container">
 			<div id="logoimg"><img src="images/logo.png"/></div>
 			<h3 class="forms-title">commentator</h3>
-			<a href="{{pathFor 'signup'}}">SIGN UP</a>
-			<a href="{{pathFor 'login'}}">LOGIN</a>
+			<a href="{{pathFor 'signup'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">SIGN UP</a>
+			<a href="{{pathFor 'login'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">LOGIN</a>
 			<div class="clear-both"></div>
 		</div>
 	</div>
+	</div>
 </template>
 <template name="notfound">
+<div class="transitions-content">
 	<h3>TEMPLATE NOT FOUND</h3>
+	</div>
 </template>
 <template name="home">
+<div class="transitions-content">
 <div id="liststyle">
 		<ul>
 			{{#each events}}
@@ -33,18 +45,21 @@
 			{{/each}}
 		</ul>
 		</div>
-		<a id="add-event-btn" href="{{pathFor 'addEvent'}}">Add Event</a>
+		<a id="add-event-btn" href="{{pathFor 'addEvent'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">Add Event</a>
+</div>
 </template>
 <template name="searchPg">
+<div class="transitions-content">
 	<div class="text-container">
 		<div class="form-input">
 			{{> esInput index="events" placeholder="Search Events"}}
 		</div>
 		<ul>
 			{{#esEach index="events"}}
-				<li><a href="{{pathFor 'eventName' _id=_id}}">{{eventName}}</a></li>
+				<li><a href="{{pathFor 'eventName' _id=_id}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">{{eventName}}</a></li>
 			{{/esEach}}
 		</ul>
+	</div>
 	</div>
 </template>
 <template name="eventSimplyTemplate">
@@ -53,20 +68,21 @@
 				<h3 class="simple-event-name">{{eventName}}<p class="simple-date">{{eventDate}}</p></h3><div class="header-details"><span class="attended">{{attendedlabel}}</span></div>
 			</div>
 		<p class="simple-synopsis">{{eventSynopsis}}</p>
-		<p class="simple-more-details four icon-container"><a class="ellipsis" href="{{pathFor 'eventName' eventName=eventName _id=_id}}"><span class="icon">&hellip;</span><span class="text">DETAILS</span></a></p>
+		<p class="simple-more-details four icon-container"><a class="ellipsis" href="{{pathFor 'eventName' eventName=eventName _id=_id}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><span class="icon">&hellip;</span><span class="text">DETAILS</span></a></p>
 		<p class="icon-container four did-you-attend"><a class="didattend" href="#"><span class="icon"><i class="fa fa-{{attendedicon}}"></i></span><span class="text">{{attended}}</span></a></p>
-		<p class="icon-container four"><a href="{{pathFor 'eventReviews' _id=_id}}"><span class="icon star"><i class="fa fa-star"></i></span><span class="text">REVIEWS</span></a></p>
+		<p class="icon-container four"><a href="{{pathFor 'eventReviews' _id=_id}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><span class="icon star mini"><i class="fa fa-star"></i></span><span class="text">REVIEWS</span></a></p>
 		{{#if _.isEqual eventAdmin currentUser._id}}
-			<p class="icon-container four"><a href="{{pathFor 'editEvent' _id=_id}}"><span class="icon"><i class="fa fa-pencil"></i></span><span class="text">EDIT</span></a></p>
+			<p class="icon-container four"><a href="{{pathFor 'editEvent' _id=_id}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><span class="icon"><i class="fa fa-pencil"></i></span><span class="text">EDIT</span></a></p>
 		{{else}}
 			{{#if _.isEqual admin currentUser.username}}
-				<p class="icon-container four"><a href="{{pathFor 'eventReviews' _id=_id}}"><span class="icon"><i class="fa fa-pencil"></i></span><span class="text">EDIT</span></a></p>
+				<p class="icon-container four"><a href="{{pathFor 'eventReviews' _id=_id}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><span class="icon"><i class="fa fa-pencil"></i></span><span class="text">EDIT</span></a></p>
 			{{/if}}
 		{{/if}}
 		<div class="clear-both"></div>
 				</li>
 </template>
 <template name="editEvent">
+<div class="transitions-content">
 	{{#each thisevent}}
 	<form id="editeventform" class="text-container">
 		<div class="form-input">
@@ -85,25 +101,30 @@
 			<label for="eventVenue">Event Venue:</label><br/>
 			<input name="eventVenue" value="{{eventVenue}}"/>
 		</div>
-		<div class="link-container-events"><p class="icon-container"><button class="icon clear-both" id="submitbtn"><span class="icon clear-both"><i class="fa fa-save"></i></span><span class="text">Save Changes</span></button></p>
-		<p class="icon-container"><a href="{{pathFor 'home'}}" id="cancelbtn"><span class="icon clear-both"><i class="fa fa-close"></i></span><span class="text">Cancel</span></a></p>
-		<p class="icon-container"><a href="#"><span class="icon clear-both"><i class="fa fa-trash"></i></span><span class="text">Delete Event</span></a></p></div>
+		<div class="link-container-events"><span class="thirds"><p class="icon-container"><button id="submitbtn"><span class="icon clear-both"><i class="fa fa-save"></i></span><span class="text small-bottom">Save Changes</span></button></p></span>
+		<span class="thirds"><p class="icon-container"><a href="{{pathFor 'home'}}" id="ÏΩbtn" data-transition-out="slideRightOut" data-transition-in="slideRightIn"><span class="icon clear-both"><i class="fa fa-close"></i></span><span class="text small-bottom">Cancel</span></a></p></span>
+		<span class="thirds"><p class="icon-container"><a href="#"><span class="icon clear-both"><i class="fa fa-trash"></i></span><span class="text small-bottom">Delete Event</span></a></p></span></div>
 	</form>
 	<div id="alertError">
 		<div id="overlay"></div>
 		<div id="alertmodal">
 			<h3>Error</h3>
 			<p>You are missing necessary values</p>
+			<p><a href="#" id="hidemodal">Return to form</a></p>
 		</div>
 	</div>
 	{{/each}}
+	</div>
 </template>
 <template name="areyousure">
+<div class="transitions-content">
 	<h3>Are You Sure?</h3>
 	<p class="details">Deleting an event is permenant. This cannot be undone.</p>
 	<a href="#" class="top button" id="yes">Yes</a><a href="#" id="no" class="top button">No</a>
+	</div>
 </template>
 <template name="ForgotPassword">
+<div class="transitions-content">
 <div class="form-style">
 <div class="block">
 <div class="center">
@@ -116,8 +137,10 @@
  </div>
  </div>
  </div>
+ </div>
 </template>
  <template name="successEmail">
+ <div class="transitions-content">
  <div class="form-style">
  	<div class="block">
  	<div class="center">
@@ -127,26 +150,30 @@
  	</div>
  	</div>
  </div>
+ </div>
  </template>
 <template name="ResetPassword">
+<div class="transitions-content">
     {{#if resetPassword}}
     <form action="/reset-password"  id="resetPasswordForm" method="post">
         <input id="resetPasswordPassword" name="password" placeholder="New Password" type="password" >
         <input id="resetPasswordPasswordConfirm" name="password-confirm" placeholder="Confirm" type="password" >
         <input class="btn-submit" type="submit" value="Reset">
-        <a href="{{pathFor 'home'}}" class="cancelbtn">Cancel</a>
+        <a href="{{pathFor 'home'}}" data-transition-out="slideRightOut" data-transition-in="slideRightIn" class="cancelbtn">Cancel</a>
     </form>
     <!-- end #reset-password-form -->
     {{/if}}
+    </div>
  </template>
  <template name="footer">
  	<div id="footer">
- 		<a href="{{pathFor 'home'}}"><i class="fa fa-home"></i></a>
- 		<a href="{{pathFor 'userdetails'}}"><i class="fa fa-user"></i></a>
- 		<a href="{{pathFor 'search'}}"><i class="fa fa-search"></i></a>
+ 		<a href="{{pathFor 'home'}}" data-transition-out="slideRightOut" data-transition-in="slideRightIn"><i class="fa fa-home"></i></a>
+ 		<a href="{{pathFor 'userdetails'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><i class="fa fa-user"></i></a>
+ 		<a href="{{pathFor 'search'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><i class="fa fa-search"></i></a>
  	</div>
  </template>
 <template name="addEvent">
+<div class="transitions-content">
 	<div class="text-container">
 		<form id="addevent">
 			<div class="form-input"><label class="event-label clear-both" for="eventname">Event Name:</label><input type="text" name="eventname" placeholder="The name of the event goes here" class="event-form clear-both"/></div>
@@ -156,15 +183,17 @@
 			<textarea type="text" name="eventsynopsis" placeholder="A brief writeup about what the event was about" class="event-form clear-right"></textarea></div>
 			<div class="form-input"><label for="eventtag" class="event-label clear-left">Event Tag:</label><input type="text" name="eventtag" placeholder="The tag that attendees can tag Instagram images with" class="event-form clear-both"/></div>
 			<button class="form-submit clear-both">Submit</button>
-			<a href="{{pathFor 'home'}}" class="cancelbtn">Cancel</a>
+			<a href="{{pathFor 'home'}}" data-transition-out="slideRightOut" data-transition-in="slideRightIn" class="cancelbtn">Cancel</a>
 		</form>
 		<div class="spacer bigbottom"></div>
 	</div>
+	</div>
 </template>
 <template name="ratingSheet">
+<div class="transitions-content">
 	{{#if currentUser}}
+	<div class="push" style="height:45px"></div>
 	<form id="ratings">
-		<h2>{{eventName}}</h2>
 		<p>Below, use the stars to rate the event and its components</p>
 		<div class="form-input"><label for="reviewHeader" class="event-label clear-both">Comment Title:</label><input name="reviewHeader" type="text" class="clear-both" placeholder="eg. This was great, the venue was terrible, etcetera"/></div>
 		<div class="form-input"><label for="eventvenue" class="event-label clear-left">Event Venue: <span>{{eventVenue}}</span></label>
@@ -209,16 +238,20 @@
 		<div class="form-input"><label for="additionalComments" class="clear-left event-label">Additional Comments:</label>
 		<div class="bigbottom"><textarea name="additionalComments" class="clear-both"></textarea></div></div>
 		<button class="form-submit clear-both">Submit</button>
-		<a class ="cancelbtn" href="{{pathFor 'home'}}">Cancel</a>
+		<a class ="cancelbtn" href="{{pathFor 'home'}}" data-transition-out="slideRightOut" data-transition-in="slideRightIn">Cancel</a>
+		<div class="push"></div>
 	</form>
 	{{else}}
+		<div class="push"></div>
 		<div class="text-container not-allowed">
 			<h3>Not <br/>Permitted</h3>
 			<p>You must be logged in to perform this action.</p>
 		</div>
 	{{/if}}
+	</div>
 </template>
 <template name="eventDetails">
+<div class="transitions-content">
 <div id="fulleventdetails" class="event-details text-container">
 	<h1 class="event-title">{{eventName}}</h1>
 	<p class="simple-date">{{eventDate}}</p>
@@ -228,17 +261,19 @@
 	<p>{{eventSynopsis}}</p>
 	{{#if _.isEqual eventTag ''}}
 	{{else}}
-	<p class="event-images"><a href="{{pathFor 'eventImages' eventName=eventName eventTag=eventTag _id=_id}}">View Event Images</a></p>
+	<p class="event-images"><a href="{{pathFor 'eventImages' eventName=eventName eventTag=eventTag _id=_id}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">View Event Images</a></p>
 	{{/if}}
 	<div class="link-container-events details">
-		<a class="left icon-container" href="{{pathFor 'ratethis'}}"><span class="icon star clear-both"><i class="fa fa-star-o"></i><span class="topplus"><i class="fa fa-plus"></i></span></span>Rate Event</a>
-		<a class="left icon-container" href="{{pathFor 'eventReviews' eventName=eventName}}"><span class="icon clear-both multi"><i class="fa fa-star"></i><i class="fa fa-star-half-full"></i><i class="fa fa-star-o"></i></span><span class="text">View Ratings</span></a>
-		<a class="left icon-container" href="#" id="attended"><span class="icon clear-both"><i class="fa fa-{{attendedicon}}"></i></span><span class="text">{{attended}}</span></a>
+		<span class="thirds"><p class="left icon-container"><a href="{{pathFor 'ratethis'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><span class="icon star clear-both"><i class="fa fa-star-o"></i><span class="topplus"><i class="fa fa-plus"></i></span></span><span class="small-bottom text">Rate Event</span></a></p></span>
+		<span class="thirds"><p class="left icon-container"><a href="{{pathFor 'eventReviews' eventName=eventName}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><span class="icon clear-both multi"><i class="fa fa-star"></i><i class="fa fa-star-half-full"></i><i class="fa fa-star-o"></i></span><span class="text">View Ratings</span></a></p></span>
+		<span class="thirds"><p class="left icon-container"><a href="#" id="attended"><span class="icon clear-both"><i class="fa fa-{{attendedicon}}"></i></span><span class="small-bottom text">{{attended}}</span></a></p></span>
 		<div class="clear-both"></div>
 	</div>
 </div>
+</div>
 </template>
 <template name="imageGrid">
+<div class="transitions-content">
 	<div id="imgcontainer">
 	<div class="text-container" id="imagegrid">
 	{{#each images}}
@@ -250,8 +285,10 @@
     <a id="next" class="right" href="#">Show More</a>
 	</div>
 	<div class="push"></div>
+	</div>
 </template>
 <template name="login">
+<div class="transitions-content">
 <div class="forms">
 <div class="block">
 <div class="center">
@@ -265,13 +302,15 @@
 		</div>
 		<button type="submit" class="clear-both">Log In</button>
 	</form>
-	<a class="clear-both smallbottom" href="{{pathFor 'forgot'}}">I forgot my password</a>
-	<a class="clear-both" href="{{pathFor 'signup'}}">I need an account</a>
+	<a class="clear-both" href="{{pathFor 'forgot'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">I forgot my password</a>
+	<a class="clear-both" href="{{pathFor 'signup'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">I need an account</a>
+</div>
 </div>
 </div>
 </div>	
 </template>
 <template name="signup">
+<div class="transitions-content">
 <div class="forms">
 	<div class="block">
 	<div class="center">
@@ -283,30 +322,35 @@
 		<div class="form-input"><input class="clear-both" type="text" name="email" placeholder="E-mail Address"/></div>
 		<button class="clear-both" type="submit">Create User</button>
 	</form>
-	<a class="clear-both" href="{{pathFor 'login'}}">I already have an account</a>
+	<a class="clear-both" href="{{pathFor 'login'}}" data-transition-out="slideRightOut" data-transition-in="slideRightIn">I already have an account</a>
+	<a class="clear-both" href="{{pathFor 'forgot'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">I forgot my password</a>
+</div>
 </div>
 </div>
 </div>
 </template>
 <template name="logout">
+<div class="transitions-content">
 <div class="text-container">
 	<h2>Logout</h2>
 	<form>
     <p>Would you like to log out of {{currentUser.username}}?</p>
     <div class="align middle">
       <button type="submit" class="submit left logout-btn"><span class="icon clear-both"><i class="fa fa-check"></i></span>Yes</button>
-      <a href="{{pathFor 'home'}}" class="cancel right logout-btn"><span class="icon clear-both"><i class="fa fa-close"></i></span>No</a>
+      <a href="{{pathFor 'home'}}" data-transition-out="slideRightOut" data-transition-in="slideRightIn" class="cancel right logout-btn"><span class="icon clear-both"><i class="fa fa-close"></i></span>No</a>
     </div>
   </form>
+  </div>
   </div>
 </template>
 <template name="accountbtns">
 <div id="header">
-	<div id="logo"><a href="{{pathFor 'home'}}">commentator</a></div>
+	<div id="logo"><a href="{{pathFor 'home'}}" data-transition-out="slideRightOut" data-transition-in="slideRightIn">commentator</a></div>
 	<div class="clear-both"></div>
 </div>
 </template>
 <template name="editaccount">
+<div class="transitions-content">
 	<div class="text-container lesstop">
 	<form id="editaccountForm">
 	<p class="form-input no-border"><b>Username:</b><br/>{{currentUser.username}}</p>
@@ -328,18 +372,23 @@
 	<p id="iferror"></p>
 	<button>Save Changes</button>
 	</form>
-	<a class ="cancelbtn" href="{{pathFor 'home'}}">Cancel</a>
+	<a class ="cancelbtn" href="{{pathFor 'home'}}" data-transition-out="slideRightOut" data-transition-in="slideRightIn">Cancel</a>
+	<div class="push"></div>
+</div>
 </div>
 </template>
 <template name="reviewTemplate">
+<div class="transitions-content">
 	<div class="review">
 		<h3 class="tagline">{{reviewHeader}}</h3>
 		<p class="rating less-marginbtm">{{averageRating}}</p>
 		<p class="additional-comments">{{additionalComments}}</p>
 		<p class="username">written by: {{username}}</p>
 	</div>
+	</div>
 </template>
 <template name="reviews">
+<div class="transitions-content">
 	<div id="reviewcontainer">
 	<div id="allreviews">
 		{{#each reviews}}
@@ -349,32 +398,37 @@
 	</div>
 	<div class="push"></div>
 	<a id="add-event-btn" href="{{reviewUrl}}">Add Review</a>
+	</div>
 </template>
 <template name="userdetails">
+<div class="transitions-content">
 	<div id="account-btn-container">
 	{{#if currentUser}}
 		{{#if _.isEqual profileImg ''}}
-			<span><i class="fa fa-user"></i></span>
+			<div class="profileimg" style="background-image: url(images/blankprofile-2.png); background-size: cover; background-position: center;">
+			</div>
 		{{else}}
-			<div class="profileimg" style="background-image: url({{profileimg}}); background-size: cover; background-position: center;">
+			<div class="profileimg" style="background-image: url({{profileimg}}); background-color: #cecece; background-position: center;">
 			</div>
 		{{/if}}
 		<div id="btns">
-		<a class="top" href="/{{currentUser.username}}/events"><img src="images/myevents.png"/><br/>My Events</a>
-		<a class="top" href="{{pathFor 'editaccount'}}"><i class="fa fa-pencil"></i><br/>Edit Profile</a>
+		<a class="top" href="/{{currentUser.username}}/events" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><img src="images/myevents.png"/><br/>My Events</a>
+		<a class="top" href="{{pathFor 'editaccount'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><i class="fa fa-pencil"></i><br/>Edit Profile</a>
 		<div class="clear-both"></div>
-		<a class="bottom" href="{{pathFor 'logout'}}">Logout</a>
+		<a class="bottom" href="{{pathFor 'logout'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">Logout</a>
 		</div>
 		<div class="clear-both"></div>
 	{{else}}
-		<a href="{{pathFor 'login'}}">LOGIN</a>
+		<a href="{{pathFor 'login'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">LOGIN</a>
 		<div class="clear-both"></div>
-		<a href="{{pathFor 'signup'}}">SIGN UP</a>
+		<a href="{{pathFor 'signup'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">SIGN UP</a>
 		<div class="clear-both"></div>
 	{{/if}}
 	</div>
+	</div>
 </template>
 <template name="username">
+<div class="transitions-content">
 	<div id="account-btn-container">
 	{{#if currentUser}}
 		{{#if _.isEqual profileImg ''}}
@@ -384,28 +438,32 @@
 			</div>
 		{{/if}}
 		<div id="btns">
-		<a class="top" href="/user/{{currentUser._id}}/events"><img src="images/myevents.png"/><br/>My Events</a>
-		<a class="top" href="{{pathFor 'editaccount'}}"><i class="fa fa-pencil"></i><br/>Edit Profile</a>
+		<a class="top" href="/user/{{currentUser._id}}/events" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><img src="images/myevents.png"/><br/>My Events</a>
+		<a class="top" href="{{pathFor 'editaccount'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn"><i class="fa fa-pencil"></i><br/>Edit Profile</a>
 		<div class="clear-both"></div>
-		<a class="bottom" href="{{pathFor 'logout'}}">Logout</a>
+		<a class="bottom" href="{{pathFor 'logout'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">Logout</a>
 		</div>
 		<div class="clear-both"></div>
 	{{else}}
-		<a href="{{pathFor 'login'}}">LOGIN</a>
+		<a href="{{pathFor 'login'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">LOGIN</a>
 		<div class="clear-both"></div>
-		<a href="{{pathFor 'signup'}}">SIGN UP</a>
+		<a href="{{pathFor 'signup'}}" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">SIGN UP</a>
 		<div class="clear-both"></div>
 	{{/if}}
 	</div>
+	</div>
 </template>
 <template name="myEvents">
+<div class="transitions-content">
 		<ul class="my-events">
 		{{#each events}}
 			{{>myoneevent}}
 		{{/each}}
 		</ul>
+		</div>
 </template>
 <template name="myoneevent">
+<div class="transitions-content">
 	<li class="event-template">
 				<p class="event-name">{{eventName}}</p>
 				<p class="date">{{eventDate}}</p>
@@ -413,4 +471,5 @@
 				<p class="event-synopsis">{{eventSynopsis}}</p>
 				<a href="#" class="removeevent"><i class="fa fa-close"></i></a>
 			</li>
+			</div>
 </template>

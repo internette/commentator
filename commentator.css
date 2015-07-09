@@ -15,11 +15,15 @@ a:active { color: #1a1017; }
 label.star i { color: black; }
 label {font-size: 12px;}
 
+.thirds{width: 32%; text-align: center; position: relative; float: left;}
+
 .clear-left { clear: left; display: block; }
 
 .clear-right { clear: right; display: block; }
 
 .clear-both { clear: both; display: block; }
+
+#iferror{color: red; font-weight: bold; font-size: 13px;}
 
 .radio-btns { clear: both; }
 .radio-btns input { display: none; }
@@ -97,10 +101,10 @@ h1.event-title { font-size: 20px; margin-bottom: 0; padding-top: 15px; }
 
 .right { float: right; }
 
-.cancelbtn{color: #1a1017!important; width: 100%!important; position: absolute; bottom: 125px; text-align: center!important; text-decoration: underline; display: block; font-size: 12px; font-weight: bold;}
+.cancelbtn{color: #1a1017!important; width: 100%!important; position: relative; text-align: center!important; text-decoration: underline; display: inline-block; font-size: 12px; font-weight: bold;}
 .link-container-events { position: absolute; bottom: 150px; margin-top: 40px; width: 100%;}
 .link-container-events.details{bottom: 105px!important;}
-.link-container-events a, .link-container-events button#submitbtn{background: transparent; overflow: hidden; height: 100px; width: 32%; padding-left: 0!important; padding-right: 0!important; display: block; text-align: center;}
+.link-container-events a, .link-container-events button#submitbtn{background: transparent; position: absolute; bottom: 0; overflow: hidden; height: auto; padding-left: 0!important; padding-right: 0!important; display: inline-block; text-align: center;}
 .link-container-events a span.icon, .link-container-events button span.icon{ color:#9fcd50; font-size: 30px;}
 .link-container-events a span.icon.star {margin-left: 0px;}
 .link-container-events a span.icon.multi {font-size: 21px;margin-top: 7px;}
@@ -113,14 +117,14 @@ h1.event-title { font-size: 20px; margin-bottom: 0; padding-top: 15px; }
 .simple-details-header .header-details * { float: right; text-align: right; }
 
 .choose{border: 1.5px solid #1a1017;}
-.file-container{display: inline-block!important; border: 1px solid #cecece; margin: 0; position: relative;  width: 235px; }
+.file-container{display: inline-block!important; border: 1px solid #cecece; margin: 0; position: relative;  width: 180px; }
 .filename{font-size: 10px; top: 4px;  margin: 0; padding: 0; height: 20px; overflow: hidden; display: table-cell; vertical-align: middle;}
 .event-label { color: #1a1017; margin-bottom: 7px; font-size: 10px; margin-top:0;}
 .event-label + input{padding: 5px; padding-top: 0; padding-bottom: 0; font-size: 12px; width: 90%; position: relative; clear: both;}
 .event-label + textarea{font-size: 12px; border: 0; outline: 0; padding: 5px; padding-top: 0; width: 90%;}
 label{font-weight: bold}
 .event-form { margin-bottom: 8px; padding: 15px; margin-left: -4px; font-size: 37px; }
-#tabletest{display: inline-block; overflow: hidden; width: 205px; padding-left:4px; }
+#tabletest{display: inline-block; overflow: hidden; width: 172px; padding-left:4px; }
 
 form button,  #forgotPasswordForm .btn-submit { background: #1a1017; font-size: 15px; border: 0; padding: .5rem; color: white; width: 100%; text-align: center; position: relative; }
 
@@ -139,9 +143,9 @@ form{position: relative; float: left; width: 100%;}
 .push { height: 100px; }
 .lesstop{margin-top: 50px!important;}
 #clearTag{position: absolute; right: 40px; font-size: 40px;}
-.icon-container { background: transparent!important; width: 32%!important; padding-left: 0!important; padding-right: 0!important;  position: relative; float: left; height: 30px; width: 25%;}
-.icon-container a, .icon-container button { font-size: 10pt!important; font-weight: bold!important; width: 100%!important; text-align: center; display: inline-block; line-height: 15px; background: transparent!important }
-span.icon .topplus{font-size: 14px; position: absolute; top: 15px; right: 43.5px;}
+.icon-container { background: transparent!important; width: 75px!important; left: 50%; margin-left: -32.5px; padding-left: 0!important; padding-right: 0!important;  position: relative; float: none; height: 30px;}
+.icon-container a, .icon-container button { position: absolute; bottom: 0; left: 0; font-size: 10pt!important; font-weight: bold!important; width: 100%!important; text-align: center; display: inline-block; line-height: 15px; background: transparent!important }
+span.icon .topplus{font-size: 14px; position: absolute; top: 3px; right: 26.5px;}
 p.simple-date { font-size: 10px; color: gray; clear: both; font-weight: 100; margin: 0; }
 p.event-location { color: #1a1017; clear: both; font-weight: 100; margin: 0; margin-bottom: 7px; font-size: 10px;}
 p.event-location span { color: #1a1017; }
@@ -150,10 +154,10 @@ p.event-synopsis{margin-top: 5px;}
 p.simple-synopsis { clear: both; font-size: 12px; padding-top: 10px;}
 p.event-images a { background: transparent; color: #9fcd50; text-decoration: underline; padding: 0; }
 p span.icon { height: 15px; width: 100%; clear: both; position: relative; float: left; font-size: 15px; color: #1a1017; margin-bottom: 10px;}
-p span.icon.star { font-size: 10px; padding-top: 1px; }
+p span.icon.star.mini { font-size: 10px; padding-top: 1px; }
 p span.text { font-size: 10px; width: 100%; display: block; text-align: center; margin: 0; line-height: 14px; position: relative; float: left; color: #1a1017; }
 p.rating { color: #9fcd50; font-size: 13px; margin-top: 5px; }
-.four.icon-container{width: 25%!important;}
+.four.icon-container{width: 25%!important; float: left; left:0; margin-left: 0;}
 span.star ~ span.text { display: block; margin-top: -1px; }
 
 #ratings { width: 94%; margin-left: 3%; margin-right: 3%; }
@@ -161,7 +165,8 @@ span.star ~ span.text { display: block; margin-top: -1px; }
 
 #alertError{display: none; z-index: 20000; position: fixed; top: 0; overflow: hidden;}
 #alertError #overlay{position: fixed;height:100%; width: 100%; background: rgba(0,0,0,0.5);}
-#alertError #alertmodal{ position: fixed; background: white; width: 90%; left: 50%; margin-left: -45%; top: 0px; }
+#alertError #alertmodal{ position: fixed; background: white; width: 90%; padding: 2%; left: 50%; margin-left: -47%; top: 10%; }
+#alertError #alertmodal p{font-size: 13px;}
 
 .username { color: gray; font-style: italic; font-size: 10px; }
 .less-marginbtm{margin-bottom: 10px;}
@@ -208,6 +213,7 @@ input[name="queryval"]{width:90%;}
 
 .bigbottom{padding-bottom: 45px;}
 .spacer{height:50px;}
+.small-bottom{padding-top: 10px;}
 
 #footer{ background: #1a1017; position: fixed; bottom: 0; width: 100%;}
 #footer a{font-size: 20px; color: white; position: relative; width: 32%; display: inline-block; text-align: center; padding-top: 15px; padding-bottom: 15px;}

@@ -310,6 +310,10 @@ Template.login.events({
      var email = event.target.email.value;
      if(password != passwordagain){
       alert('passwords do not match')
+     } else if (Meteor.users.find({username: username}).fetch().length>=1){
+      alert('This username already exists');
+     } else if (Meteor.users.find({email: email}).fetch().length>=1){
+      alert('This e-mail is already being used');
      } else {
       Accounts.createUser({
         username: username,
@@ -429,6 +433,9 @@ Template.username.helpers({
     'click #cancel': function(){
       Router.go('/');
     },
+    'click #hidemodal': function(e){
+      $('#alertError').hide();
+    },
     'submit form': function(e){
       e.preventDefault();
       var eventName = e.target.eventName.value;
@@ -445,8 +452,9 @@ Template.username.helpers({
   Template.editaccount.events({
     'submit form': function(e){
       e.preventDefault();
-      if(e.target.newpassword.value !== e.target.newpassword2.value){
+      if(e.target.newpassword.value != e.target.newpassword2.value){
         document.getElementById('iferror').innerHTML='You new passwords do not match';
+        return false;
       } else if ((e.target.newpassword.value === e.target.newpassword2.value)&&(e.target.newpassword.value!=='')&&(e.target.newpassword2.value!=='')){
         Meteor.call("changepassword", e.target.newpassword.value, function(err, res){
           if(err){
@@ -561,6 +569,9 @@ Template.username.helpers({
    }
    replaceWithStars();
   }
+  //Transitions
+  
+  //End Transitions
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
   });
@@ -696,6 +707,9 @@ if (Meteor.isServer) {
   Meteor.publish('userById', function(userid){
     return Meteor.users.find({_id: userid}, {fields: {'profileImg': 1}});
   });
+  Meteor.publish('usernamesandemails', function(){
+    return Meteor.users.find({},{fields: {'username': 1, 'email': 1}});
+  });
     Meteor.publish('editUser', function(){
     if(this.userId){
       return Meteor.users.find({_id: this.userId}, {fields: {'profileImg': 1, 'password': 1}});
@@ -717,7 +731,7 @@ if (Meteor.isServer) {
     this.wait(Meteor.subscribe('allevents'));
     if(this.ready()){
         if(!Meteor.userId()){
-          this.layout('');
+          this.layout('landinglayout');
           this.render('landing');
         } else {
           this.render('home',{
@@ -792,7 +806,7 @@ Router.route('/events/:_id/images', function(){
 });
 Router.route('/forgot', function(){
   if(this.ready()){
-    this.layout('');
+    this.layout('landinglayout');
     this.render('ForgotPassword')
   }
 },{
@@ -800,7 +814,7 @@ Router.route('/forgot', function(){
 });
 Router.route('/reset-password', function(){
   if(this.ready()){
-    this.layout('');
+    this.layout('landinglayout');
     this.render('ResetPassword')
   }
 },{
@@ -808,7 +822,7 @@ Router.route('/reset-password', function(){
 });
 Router.route('/success-email', function(){
   if(this.ready()){
-    this.layout('');
+    this.layout('landinglayout');
     this.render('successEmail');
   }
 },{
@@ -831,7 +845,7 @@ Router.route('/events/:_id/event-reviews', function(){
 Router.route('/:_id/edit-event', function(){
   this.wait(Meteor.subscribe('eventid', this.params._id));
   if(this.ready()){
-    this.render("editEvents", {
+    this.render("editEvent", {
       data: function(){
         return Events.findOne({_id: this.params._id});
       }
@@ -842,15 +856,16 @@ Router.route('/:_id/edit-event', function(){
 });
 Router.route('/login', function(){
   if(this.ready()){
-    this.layout('');
+    this.layout('landinglayout');
     this.render('login');
   }
 }, {
   name: 'login'
 });
 Router.route('/signup', function(){
+  this.wait(Meteor.subscribe('usernamesandemails'));
   if(this.ready()){
-    this.layout('');
+    this.layout('landinglayout');
     this.render('signup');
   }
 },{
