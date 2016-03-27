@@ -1,5 +1,4 @@
 Events = new Mongo.Collection("events");
-Events.initEasySearch('eventName');
 Reviews = new Mongo.Collection("reviews");
 if (Meteor.isClient) {
   //Helpful Meteor functions
@@ -68,9 +67,6 @@ areValidPasswords = function(password, confirm) {
   });
   Template.addEvent.events({
     'submit form': function(event){
-      if(! Meteor.userId()){
-        throw new Meteor.Error("not-authorized");
-      }
       event.preventDefault();
       var eventTag = event.target.eventtag.value;
       if (eventTag.indexOf('#')===1){
@@ -129,42 +125,6 @@ areValidPasswords = function(password, confirm) {
       Router.go('/');
     }
     });
-  Template.eventDetails.events({
-    'click #attended': function(e){
-      if($(e.currentTarget).text() !=''){
-        if($(e.currentTarget).children('span.text').text()==="Mark Attended"){
-          Meteor.call("addEvent", this._id, this.eventName, this.eventDate, this.eventSynopsis, this.eventVenue, function(error, user){console.log(user.events)});
-          Meteor.call("addUsername", this._id, Meteor.user().username, function(error, user){console.log(user)});        
-        } else if ($(e.currentTarget).children('span.text').text()==="Mark Not Attended"){
-          Meteor.call("removeEvent", this._id, this.eventName, this.eventDate, this.eventSynopsis, this.eventVenue, function(error, user){console.log(user.events)});
-          Meteor.call("removeUsername", this._id, Meteor.user().username, function(error, user){console.log(user)}); 
-        } else {
-        }
-      }
-    }
-  });
-  Template.eventDetails.helpers({
-    attended: function(){
-      function isInArray(thisid, value) {
-        return Events.findOne(thisid).attendees.indexOf(value) > -1;
-      }
-      if(isInArray(this._id, Meteor.user().username)){
-        return "Mark Not Attended";
-      } else {
-        return "Mark Attended";
-      }
-    },
-    attendedicon: function(){
-      function isInArray(thisid, value) {
-        return Events.findOne(thisid).attendees.indexOf(value) > -1;
-      }
-      if(isInArray(this._id, Meteor.user().username)){
-        return "user-times";
-      } else {
-        return "user-plus";
-      }
-    }
-  });
   Template.eventSimplyTemplate.events({
     'click .didattend': function(e){
       if($(e.currentTarget).text() !=''){
@@ -195,9 +155,9 @@ areValidPasswords = function(password, confirm) {
         return Events.findOne(thisid).attendees.indexOf(value) > -1;
       }
       if(isInArray(this._id,Meteor.user().username)){
-        return "user-times";
+        return "close";
       } else {
-        return "user-plus";
+        return "check";
       }
     },
     attendedlabel: function(){
@@ -210,7 +170,6 @@ areValidPasswords = function(password, confirm) {
       }
     }
   });
-
   Template.ratingSheet.events({
    'click #event-name-ratings>label': function(event){
       $('#event-name-ratings label').each(function(){
@@ -278,7 +237,7 @@ areValidPasswords = function(password, confirm) {
         eventId: this._id
       });
       Events.upsert({_id: this._id},{$set: {overallRating: avg}});
-      Router.go('eventReviews');
+      Router.go('/');
     }
   });
 Template.login.events({
@@ -293,6 +252,7 @@ Template.login.events({
           Router.go('/');
         }
       });
+      Router.go('/');
   }
   });
   Template.signup.events({
@@ -310,10 +270,6 @@ Template.login.events({
      var email = event.target.email.value;
      if(password != passwordagain){
       alert('passwords do not match')
-     } else if (Meteor.users.find({username: username}).fetch().length>=1){
-      alert('This username already exists');
-     } else if (Meteor.users.find({email: email}).fetch().length>=1){
-      alert('This e-mail is already being used');
      } else {
       Accounts.createUser({
         username: username,
@@ -323,7 +279,7 @@ Template.login.events({
         profileImg: ''
       }, function(err){
         if(err){
-          console.log(err);
+          console.log('You are not logged in');
         
       } else {
         Router.go('/');
@@ -369,6 +325,7 @@ Template.ResetPassword.helpers({
   return Session.get('resetPassword');
  }
 });
+ 
 Template.ResetPassword.events({
   'submit #resetPasswordForm': function(e, t) {
     e.preventDefault();
@@ -412,12 +369,6 @@ Template.username.helpers({
       Meteor.call("instagramFetchMore", this.eventTag, this._id, function(err, res){if(err){} else {console.log(res)}});
     }
   });
-  Template.searchPg.events({
-    'click #searchbtn':function(event, instance){
-      event.preventDefault();
-      $(event.currentTarget).submit();
-    }
-  });
   Template.editEvent.helpers({
     thisevent: function(){
       return Events.find();
@@ -425,16 +376,13 @@ Template.username.helpers({
   });
   Template.editEvent.events({
     'focus input': function(e){
-      $(e.currentTarget).parent('.form-input').css({'border':'1px solid #9fcd50'});
+      $(e.currentTarget).parent('.form-input').css({'border':'1px solid #cbe86b'});
     },
     'blur input': function(e){
       $(e.currentTarget).parent('.form-input').css({'border':'1px solid #eeeeee'});
     },
     'click #cancel': function(){
       Router.go('/');
-    },
-    'click #hidemodal': function(e){
-      $('#alertError').hide();
     },
     'submit form': function(e){
       e.preventDefault();
@@ -448,67 +396,6 @@ Template.username.helpers({
         Meteor.call('updateEvent', this._id, eventName, eventVenue, eventTag, eventSpeaker, function(err,res){if(err){console.log(err)}})
       }
       }
-  });
-  Template.editaccount.events({
-    'submit form': function(e){
-      e.preventDefault();
-      if(e.target.newpassword.value != e.target.newpassword2.value){
-        document.getElementById('iferror').innerHTML='You new passwords do not match';
-        return false;
-      } else if ((e.target.newpassword.value === e.target.newpassword2.value)&&(e.target.newpassword.value!=='')&&(e.target.newpassword2.value!=='')){
-        Meteor.call("changepassword", e.target.newpassword.value, function(err, res){
-          if(err){
-            console.log(err)
-          } else {
-            //Meteor.call("loginnow", Session.get("username"), e.target.newpassword.value);
-            Router.go('/');
-          }
-        });
-
-      }
-      var profileimg = '';
-      if(Session.get("tempimg") !== '/images/blankprofile-2.png'){
-        profileimg = Session.get("tempimg");
-      } else if (Session.get("tempimg") === '/images/blankprofile-2.png'){
-        profileimg = '';
-      }
-      Meteor.call("updateProfileImg", profileimg, function(err,res){ if(err){console.log(err)}});
-      Router.go('/userdetails');
-    },
-    'click #removeimg': function(){
-      Meteor.call("cloudinary_delete", Session.get('profileimgid'), function(e,r){
-        if(!e){
-          Session.set("tempimg", '/images/blankprofile-2.png');
-          Session.set("filename", '');
-        }
-      })
-    },
-    'change #usericonupload': function(ev){
-      Meteor.call("cloudinary_delete", Session.get('profileimgid'), function(e,r){
-        if(!e){
-          Session.set("tempimg", '/images/blankprofile-2.png');
-          Session.set("filename", '');
-        }
-      });
-    }
-  });
-  Template.editaccount.rendered = function(){
-    Session.set("tempimg", '/images/blankprofile-2.png');
-    Session.set("filename", '');
-  }
-  Template.myoneevent.events({
-    'click .removeevent' : function(){
-      Meteor.call('removeUsername', this._id, Meteor.user().username);
-      Meteor.call('removeEvent', this._id, this.eventName, this.eventDate, this.eventSynopsis, this.eventVenue);
-    }
-  });
-  Template.editaccount.helpers({
-    tempimg: function(){
-      return Session.get("tempimg");
-    },
-    filename: function(){
-      return Session.get("filename");
-    }
   });
   Template.reviewTemplate.rendered = function(){
     $('p.rating').each(function(){
@@ -535,14 +422,8 @@ Template.username.helpers({
       }
     });
   }
-  //Cloudinary AddOn
-  _cloudinary.after.update(function(user,file){
-    if(file.percent_uploaded === 100 && !file.uploading){
-      Session.set('profileimgid', file.public_id);
-      Session.set('tempimg', file.url);
-      Session.set('filename', file.url);
-    }
-  });
+  /*Template.imageGrid.helpers({
+  });*/
   Template.eventDetails.rendered = function() {
    function replaceWithStars(){
     if($('p.rating').text()<=(1/2)){
@@ -569,9 +450,6 @@ Template.username.helpers({
    }
    replaceWithStars();
   }
-  //Transitions
-  
-  //End Transitions
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
   });
@@ -581,35 +459,19 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
       process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
-
       Events.allow({
         insert: function(userId, event){
           return true;
         }
       });
-      Reviews.allow({
-        insert: function(userId, review){
-          return true;
-        }
-      });
   });
   Meteor.methods({
-    tempImg:function(response){
-    },
-    updateProfileImg: function(profileimg){
-      Meteor.users.update(Meteor.userId(), {$set: {profileImg: profileimg}});
-      return Meteor.user();
-    },
-    changepassword:function(password){
-      Accounts.setPassword(Meteor.userId(), password, function(err, res) {
-        if (err) {
-          console.log('We are sorry but something went wrong.');
-        } else {
-        }
-      });
-    },
-    loginnow: function(user, password){
-      Meteor.loginWithPassword(user, password);
+    save_url:function(response){
+      //console.log(response.upload_data.url);
+      //Meteor.users.update(Meteor.userId(), {$set: {profileImg: response.upload_data.url}});
+      //return Meteor.user();
+      //Session.set('profileimg', )
+      console.log(response.upload_data.public_id);
     },
     addEvent: function(id, title, date, synopsis, location){
       Meteor.users.update(Meteor.userId(), {$push: {events: {_id: id, eventName: title, eventDate: date, eventSynopsis: synopsis, eventVenue: location}}});
@@ -690,194 +552,167 @@ if (Meteor.isServer) {
     }
   });
   Meteor.publish('allevents', function(){
-    return Events.find({}, {attendees: 1});
+    return Events.find({});
   });
   Meteor.publish('eventname', function(eventname){
-    return Events.find({eventName: eventname}, {attendees: 1});
+    return Events.find({eventName: eventname});
   });
   Meteor.publish('eventid', function(eventid){
-    return Events.find({_id: eventid}, {attendees: 1});
+    return Events.find({_id: eventid});
   });
   Meteor.publish('event-reviews', function(eventid){
     return Reviews.find({eventId: eventid});
   });
   Meteor.publish('userByUsername', function(username){
-    return Meteor.users.find({username:username}, {fields: {'profileImg': 1, 'events':1}});
+    return Meteor.users.find({username:username}, {fields: {profileImg: 1, events:true}});
   });
   Meteor.publish('userById', function(userid){
-    return Meteor.users.find({_id: userid}, {fields: {'profileImg': 1}});
-  });
-  Meteor.publish('usernamesandemails', function(){
-    return Meteor.users.find({},{fields: {'username': 1, 'email': 1}});
-  });
-    Meteor.publish('editUser', function(){
-    if(this.userId){
-      return Meteor.users.find({_id: this.userId}, {fields: {'profileImg': 1, 'password': 1}});
-    }
+    return Meteor.users.find({_id: userid}, {fields: {profileImg: 1}});
   });
   Accounts.onCreateUser(function(options,user){
     user.events = [];
     user.profileImg = '';
-    user.password = '';
     return user;
   });
   }
-  Router.configure({
-    layoutTemplate: 'layout',
-    notFoundTemplate: 'notfound',
-    template: 'home'
-  });
-  Router.route('/', function(){
-    this.wait(Meteor.subscribe('allevents'));
-    if(this.ready()){
-        if(!Meteor.userId()){
-          this.layout('landinglayout');
-          this.render('landing');
-        } else {
-          this.render('home',{
-            data: function(){
-              return Events.find();
-            }
-          });
-        }
-      }
-  },{
-    name: "home"
-  });
-Router.route('/add-event',function(){
-  if(this.ready()){
-    this.render('addEvent',{
-      data: function(){
-        return Events.find()
-      }
-    });
-  }
-},{
-  name: "addEvent"
-});
-Router.route('/search', function(){
-    this.wait(Meteor.subscribe('allevents'));
-    if(this.ready()){
-        this.render('searchPg',{
-          data: function(){
-            return Events.find();
-          }
-        })
-      }
-}, {
-  name: "search"
-});
-Router.route('/rate-event/:_id', function(){
-  this.wait(Meteor.subscribe('eventid', this.params._id));
-  if(this.ready()){
-      this.render('ratingSheet',{
-        data: function(){
-          return Events.findOne({_id: this.params._id});
-        }
-      })
+  Router.route('/', {
+    name: "home",
+    waitOn: function(){
+      Meteor.subscribe('allevents');
+    },
+    data: function(){
+      return Events.find();
+    },
+    action: function(){
+      if(this.ready()){
+        this.render('home')}
     }
-}, {
-  name: "ratethis"
 });
-Router.route('/events/:_id', function(){
-  this.wait(Meteor.subscribe('eventid', this.params._id));
-  if(this.ready()){
-    this.render("eventDetails", {
-      data: function(){
-        return Events.findOne({_id: this.params._id});
-      }
-    })
+Router.route('/add-event',{
+  name: "addEvent",
+  data: function(){
+    return Events.find();
+  },
+  action: function(){
+    if(this.ready()){
+      this.render('addEvent')
+    }
   }
-},{
-  name: "eventName"
 });
-Router.route('/events/:_id/images', function(){
-  this.wait(Meteor.subscribe('eventid', this.params._id));
-  if(this.ready()){
-    Meteor.call("instagramFetch", this.params.eventTag, this.params._id, function(err, res){if(err){} else {console.log(res)}});
-    this.render('imageGrid', {
-      data: function(){
-        return Events.findOne({_id: this.params._id});
-      }
-    });
+Router.route('/rate-event/:_id', {
+  name: "ratethis",
+  waitOn: function(){
+    return Meteor.subscribe('eventid', this.params._id);
+  },
+  data: function(){
+    return Events.findOne({_id: this.params._id});
+  },
+  action: function(){
+    if(this.ready()){
+      this.render("ratingSheet");
+    } else {
+      console.log("error");
+    }
   }
-},{
-  name: "eventImages"
 });
-Router.route('/forgot', function(){
-  if(this.ready()){
-    this.layout('landinglayout');
-    this.render('ForgotPassword')
+Router.route('/events/:_id', {
+  name: "eventName",
+  waitOn: function(){
+    return Meteor.subscribe('eventid', this.params._id);
+  },
+  data: function(){
+    return Events.findOne({_id: this.params._id});
+  },
+  action: function(){
+    if(this.ready()){
+      this.render("eventDetails");
+    } else {
+      console.log('error');
+    }
   }
-},{
-  name: 'forgot'
 });
-Router.route('/reset-password', function(){
-  if(this.ready()){
-    this.layout('landinglayout');
-    this.render('ResetPassword')
+Router.route('/events/:_id/images', {
+  name: "eventImages",
+  waitOn: function(){
+    return Meteor.subscribe('eventid', this.params._id);
+  },
+  data: function(){
+    return Events.findOne({_id: this.params._id});
+  },
+  action: function(){
+    if(this.ready()){
+      Meteor.call("instagramFetch", this.params.eventTag, this.params._id, function(err, res){if(err){} else {console.log(res)}});
+      this.render('imageGrid');
+    } else {
+      console.log('error')
+    }
   }
-},{
-  name: 'reset-password'
 });
-Router.route('/success-email', function(){
-  if(this.ready()){
-    this.layout('landinglayout');
-    this.render('successEmail');
+Router.route('/forgot', {
+  name: 'forgot',
+  action: function(){
+    if(this.ready()){
+      this.render('ForgotPassword');
+    } else {
+      console.log('error')
+    }
   }
-},{
-  name: 'success-email'
 });
-Router.route('/events/:_id/event-reviews', function(){
-  this.wait(Meteor.subscribe('event-reviews', this.params._id));
-  this.wait(Meteor.subscribe('allevents'));
-  if(this.ready()){
-    this.render("reviews", {
-      data: function(){
-        return {reviews: Reviews.find(),
-                  events: Events.find()};
-      }
-    })
+Router.route('/reset-password', {
+  name: 'reset-password',
+  action: function(){
+    if(this.ready()){
+      this.render('ResetPassword');
+    } else {
+      console.log('error')
+    }
   }
-},{
-  name: "eventReviews"
 });
-Router.route('/:_id/edit-event', function(){
-  this.wait(Meteor.subscribe('eventid', this.params._id));
-  if(this.ready()){
-    this.render("editEvent", {
-      data: function(){
-        return Events.findOne({_id: this.params._id});
-      }
-    })
+Router.route('/success-email', {
+  name: 'success-email',
+  action: function(){
+    if(this.ready()){
+      this.render('successEmail');
+    } else {
+      console.log('error')
+    }
   }
-},{
-  name: "editEvent"
 });
-Router.route('/login', function(){
-  if(this.ready()){
-    this.layout('landinglayout');
-    this.render('login');
+Router.route('/events/:_id/event-reviews', {
+  name: "eventReviews",
+  waitOn: function(){   
+    return Meteor.subscribe('event-reviews', this.params._id);
+  },
+  data: function(){
+    return Reviews.find();
+  },
+  action: function(){
+    if(this.ready()){
+      this.render("reviews");
+    } else {
+      console.log('error');
+    }
   }
-}, {
-  name: 'login'
 });
-Router.route('/signup', function(){
-  this.wait(Meteor.subscribe('usernamesandemails'));
-  if(this.ready()){
-    this.layout('landinglayout');
-    this.render('signup');
+Router.route('/:_id/edit-event', {
+  name: "editEvent",
+  waitOn: function(){   
+    return Meteor.subscribe('eventid', this.params._id);
+  },
+  data: function(){
+    return Events.findOne({_id: this.params._id});
+  },
+  action: function(){
+    if(this.ready()){
+      this.render("editEvent");
+    } else {
+      console.log('error');
+    }
   }
-},{
-  name: 'signup'
 });
-Router.route('/logout', function(){
-  if(this.ready()){
-    this.render('logout');
-  }
-},{
-  name: 'logout'
-});
+Router.route('/login');
+Router.route('/signup');
+Router.route('/logout');
 Router.route('/user/:_id', function(){
   this.wait(Meteor.subscribe('userById', this.params._id));
   if (this.ready()){
@@ -887,8 +722,6 @@ Router.route('/user/:_id', function(){
       }
     });
   }
-},{
-  name: 'username'
 });
 Router.route('/userdetails', function(){
   this.wait(Meteor.subscribe('userById', Meteor.user()._id));
@@ -899,31 +732,25 @@ Router.route('/userdetails', function(){
       }
     });
   }
-},{
-  name: 'userdetails'
 });
 Router.route('/editaccount', function(){
-  this.wait(Meteor.subscribe('editUser'));
+  this.wait(Meteor.subscribe('userById', this.params._id));
   if (this.ready()){
-    this.render('editaccount', {
+    this.render('editAccount', {
       data: function(){
-        return Meteor.users.findOne({_id: Meteor.user()._id});
+        return Meteor.users.findOne({_id: this.params._id});
       }
     });
   }
-},{
-  name: 'editaccount'
-});
+})
 Router.route('/:username/events', function(){
-  this.wait([Meteor.subscribe('userByUsername',this.params.username), Meteor.subscribe('allevents')]);
+  this.wait(Meteor.subscribe('userByUsername',this.params.username));
   if (this.ready()){
     this.render('myEvents', {
       data: function(){
-        return [Meteor.users.findOne({username: this.params.username}),Events.find()]
+        return Meteor.users.findOne({username: this.params.username});
       }
     });
   }
-},{
-  name: 'myEvents'
 });
 // Additional Codes

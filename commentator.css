@@ -1,21 +1,20 @@
 @font-face {font-family: 'Bitter'; src: url(/fonts/Bitterregular.ttf);}
 @font-face {font-family: 'Bitter'; font-weight: bold; src: url(/fonts/Bitter700.ttf);}
-@font-face {font-family: 'Lato'; src: url(/fonts/Latoregular.ttf) format(truetype)}
+@font-face {font-family: 'Lato'; src: url(/fonts/Latoregular.ttf) format(truetype);}
 @font-face {font-family: 'Lato'; font-weight: bold; src: url(/fonts/Lato700.ttf) format(truetype);}
 
-html, body { overflow-x: hidden; overflow-y: auto; padding: 0; margin: 0; background: white; height: 100%; width: 100%; font-family: 'Lato', Arial, sans-serif;}
+html, body { overflow-x: hidden; padding: 0; margin: 0; background: white; height: 100%; width: 100%; font-family: 'Lato', Arial, sans-serif;}
 
 * { outline: 0; outline-offset: 0;  font-family: 'Lato', Arial, sans-serif;}
 
-a { text-decoration: none; color: #1a1017; }
-a:visited { color: #1a1017; }
-a:hover { color: #9fcd50; }
-a:active { color: #1a1017; }
+a { text-decoration: none; color: #6a4a3c; }
+a:visited { color: #6a4a3c; }
+a:hover { color: #00A0B0; }
+a:active { color: #6a4a3c; }
+
+p{font-size: 37px;}
 
 label.star i { color: black; }
-label {font-size: 12px;}
-
-.thirds{width: 32%; text-align: center; position: relative; float: left;}
 
 .clear-left { clear: left; display: block; }
 
@@ -23,45 +22,38 @@ label {font-size: 12px;}
 
 .clear-both { clear: both; display: block; }
 
-#iferror{color: red; font-weight: bold; font-size: 13px;}
-
-.radio-btns { clear: both; }
+.radio-btns { clear: both; position: relative; float: left; }
 .radio-btns input { display: none; }
-.radio-btns label {font-size: 18px;}
 
 .assigned-left { position: relative; float: left; display: block; }
 
-textarea { min-height: 100px; min-width: 200px; font-size: 12px; outline: 0; border: 0; resize: none; width: 100%; color: #151515;}
+textarea { min-height: 200px; min-width: 200px;}
 
 ul { list-style-type: none; margin: 0; padding: 0; }
 
-.event-template, .review { width: 90%; padding-left: 5%; position: relative; padding-right: 4.5%; clear: both; border-bottom: 1px solid gainsboro; margin-top: 2px; }
+.event-template, .review { width: 94%; padding-left: 3%; padding-right: 3%; clear: both; border-bottom: 1px solid gainsboro; margin-top: 2px; }
 
 .clear-both { clear: both; }
 
-#header { background: #9fcd50; color: white; width: 100%; height: auto; padding-top: 20px; font-size: 16pt;  padding-bottom: 3px; position: fixed; z-index: 2000; top: 0; text-align: center;}
-#header a { color: #1a1017; display: block; padding-bottom: 5px; font-family: "Bitter", Arial, sans-serif; font-size: 40px; font-weight: 700;}
+#header { background: #cbe86b; color: white; width: 100%; height: auto; padding-top: 20px; font-size: 16pt;  padding-bottom: 3px; position: fixed; z-index: 2000; top: 0; text-align: center;}
+#header a { color: #1c140d; display: block; padding: 5px; font-family: "Bitter", Arial, sans-serif; font-size: 40px; font-weight: 700; margin-left: 25px;}
 #header i { position: relative; float: right; display: block; }
 #user-icon{padding:20px!important;}
 
-.my-events{ margin-top: 65px;}
-.my-events li { border-bottom: 1px #cecece solid; font-size: 12px;}
-.my-events .event-name { font-family: 'Lato', Arial, sans-serif; font-weight: bold; display: block; font-size: 15px; margin-bottom: 5px; color: #1a1017; }
-.my-events .date { margin-top: 0px; font-size: 10px; color: gray; margin-bottom: 0px;}
-
-.removeevent{ position: absolute; top: 5px; right: 20px;}
+.my-events li { border-bottom: 1px #cecece solid; }
+.my-events .event-name { font-weight: bold; display: block; font-size: 22px; margin-bottom: 5px; color: #987F69; }
+.my-events .date { margin-top: 0px; font-size: 14px; color: gray; }
 
 #account-btn-container { position: relative; height: 100%; width: 100%; text-align: center; }
-#account-btn-container span:first-child { height: 75%; font-size: 200pt; width: 100%; text-align: center;}
-#account-btn-container span:first-child i{padding-top: 95px;}
-#account-btn-container #btns{position: fixed; background: #eee; width: 100%; bottom: 55px; border-top: 1px #cecece solid;}
-#account-btn-container #btns a{color: #1a1017; font-size: 15px; display: inline-block; position: relative; float: left;}
+#account-btn-container span:first-child { height: 65%; font-size: 275pt; }
+#account-btn-container #btns{position: fixed; background: #eee; width: 100%; bottom: 85px;}
+#account-btn-container #btns a{color: #1c140d; font-size: 40px; display: inline-block; position: relative; float: left;}
 #account-btn-container #btns a:first-child{ border-right: 1px #cecece solid;}
 #account-btn-container #btns a:nth-child(2){ margin-left: -1px;}
 #account-btn-container #btns a:last-child{ border-top: 1px #cecece solid;}
 #account-btn-container #btns a.top{width:45%;padding: 2.5%;}
-#account-btn-container #btns a i{font-size: 40px;padding-top: 17px; padding-bottom: 17px;}
-#account-btn-container #btns a img{ width: 45px; padding-top: 13px; padding-bottom: 13px;}
+#account-btn-container #btns a i{font-size: 90px;padding-top: 27px; padding-bottom: 27px;}
+#account-btn-container #btns a img{ width: 100px; padding-top: 20px; padding-bottom: 20px;}
 #account-btn-container #btns a.bottom{width:95%;padding: 2.5%; padding-top: 5%; padding-bottom: 5%;}
 
 li h3 { color: #987F69; text-transform: capitalize; }
@@ -70,155 +62,120 @@ li h3 { color: #987F69; text-transform: capitalize; }
 .not-allowed p { display: block; position: relative; clear: both; }
 .not-allowed a { display: block; position: relative; clear: both; padding: 10px; padding-left: 15px; padding-right: 15px; }
 
-.tagline { margin-bottom: 0px; display: block; font-size: 20px; text-align: left;}
+.tagline { margin-bottom: 0px; display: block; font-size: 50px; text-align: left;}
 
-h2 { color: #1a1017; }
+h2 { color: #987F69; }
 
 textarea[name=eventsynopsis]{width: 97%; font-size: 21px;}
 
-#reviewcontainer{height: 85%; margin-top: 50px; padding-right: 30px; position: fixed; overflow: hidden; width: 100%;}
+#reviewcontainer{height: 85%; padding-right: 30px; position: fixed; overflow: hidden; width: 100%;}
 #reviewcontainer #allreviews {overflow-y: scroll; position: relative;}
 
 #add-event-btn { position: fixed; font-size: 15px; bottom: 50px; padding-top: 13px; padding-bottom: 15px; background: #EEEEEE; color: #484538; width: 100%; text-align: center; border-top: #cecece 1px solid; }
 #logo{ width: 100%; text-align: center;}
 #logo a{font-size: 15px;}
-#logoimg{ width: 70px; left:50%; margin-left: -35px; position: relative;}
+#logoimg{ width: 250px; left:50%; margin-left: -125px; position: relative;}
 #logoimg img{width: 100%;}
 .paddingtop {padding-top: 100px;}
 .block{display: table; width: 100%; height:100%;}
 .center{display: table-cell; margin: auto; vertical-align: middle; margin-top: -50px;}
-.extra-details{ width: 65%; position: relative; left: 50%; margin-left: -32.5%; text-align: center; font-size: 16px; margin-top:70px;}
+.extra-details{ width: 65%; position: relative; left: 50%; margin-left: -32.5%; text-align: center; font-size: 40px; margin-top:70px;}
 
-.text-container { width: 90%; margin-left: 5%; margin-right: 5%; height: 100%; position: relative; margin-top: 70px;}
-h1.event-title { font-size: 20px; margin-bottom: 0; padding-top: 15px; }
+.text-container { width: 92%; margin-left: 4%; margin-right: 4%; margin-top: 100px;}
+h1.event-title { font-size: 50px; margin-bottom: 0; }
 
-.logout-btn{background: transparent!important; font-size: 20px; color: #1a1017; width:50%!important; padding:0!important; text-align: center!important;}
-.logout-btn i{font-size: 24px;}
-
-.event-details a { font-size: 13px; font-weight: bold; padding: 10px; padding-left: 15px; padding-right: 15px; background: #9fcd50; display: inline-block; position: relative; color: #1a1017; }
+.event-details a { font-size: 40px; padding: 10px; padding-left: 15px; padding-right: 15px; background: #cbe86b; display: inline-block; position: relative; color: #1c140d; }
 
 .left { float: left; }
 
 .right { float: right; }
 
-.cancelbtn{color: #1a1017!important; width: 100%!important; position: relative; text-align: center!important; text-decoration: underline; display: inline-block; font-size: 12px; font-weight: bold;}
-.link-container-events { position: absolute; bottom: 150px; margin-top: 40px; width: 100%;}
-.link-container-events.details{bottom: 105px!important;}
-.link-container-events a, .link-container-events button#submitbtn{background: transparent; position: absolute; bottom: 0; overflow: hidden; height: auto; padding-left: 0!important; padding-right: 0!important; display: inline-block; text-align: center;}
-.link-container-events a span.icon, .link-container-events button span.icon{ color:#9fcd50; font-size: 30px;}
-.link-container-events a span.icon.star {margin-left: 0px;}
-.link-container-events a span.icon.multi {font-size: 21px;margin-top: 7px;}
-.link-container-events a span.icon.multi + span.text {margin-top: 3px; display: block;}
-.link-container-events a span.icon.multi i{ margin-right:3px;}
-.link-container-events a span.icon.multi i:last-child{ margin-right: 0;}
+.link-container-events { position: relative; margin-top: 40px; }
+
 .simple-details-header { clear: both; }
-.simple-details-header h3.simple-event-name { color: #1a1017; position: relative; float: left; font-size: 15px; margin: 0; margin-top: 10px; padding: 0; text-align: left;}
+.simple-details-header h3.simple-event-name { color: #1c140d; position: relative; float: left; font-size: 45px; margin: 0; margin-top: 10px; padding: 0; text-align: left;}
 .simple-details-header .header-details { position: relative; float: right; width: auto; }
 .simple-details-header .header-details * { float: right; text-align: right; }
 
-.choose{border: 1.5px solid #1a1017;}
-.file-container{display: inline-block!important; border: 1px solid #cecece; margin: 0; position: relative;  width: 180px; }
-.filename{font-size: 10px; top: 4px;  margin: 0; padding: 0; height: 20px; overflow: hidden; display: table-cell; vertical-align: middle;}
-.event-label { color: #1a1017; margin-bottom: 7px; font-size: 10px; margin-top:0;}
-.event-label + input{padding: 5px; padding-top: 0; padding-bottom: 0; font-size: 12px; width: 90%; position: relative; clear: both;}
+.event-label { color: #1c140d; margin-bottom: 7px; font-size: 10px; margin-top:0;}
+.event-label + input{padding: 5px; padding-top: 0; font-size: 12px; width: 90%; position: relative; clear: both;}
 .event-label + textarea{font-size: 12px; border: 0; outline: 0; padding: 5px; padding-top: 0; width: 90%;}
 label{font-weight: bold}
 .event-form { margin-bottom: 8px; padding: 15px; margin-left: -4px; font-size: 37px; }
-#tabletest{display: inline-block; overflow: hidden; width: 172px; padding-left:4px; }
 
-form button,  #forgotPasswordForm .btn-submit { background: #1a1017; font-size: 15px; border: 0; padding: .5rem; color: white; width: 100%; text-align: center; position: relative; }
+form button,  #forgotPasswordForm .btn-submit { background: #1c140d; border: 0; padding: .5rem; color: white; font-size: 20px; width: 100%; text-align: center; position: relative; }
 
-form{position: relative; float: left; width: 100%;}
-.form-submit{position: relative; -webkit-appearance: none; background: #1a1017; background-image: none; border-radius: 0; width: 98.25%; font-family: 'Lato', Arial, sans-serif; font-size: 13px; text-align: center; color: white; margin-left: -2px; margin-top: 10px;}
+.form-submit{position: relative; float: left;}
 
-.top.button{background: #eee; border: 1px solid #cecece; color: #1a1017; font-size: 10px; width: 49.5%; display: inline-block; padding-top: 10px; padding-bottom: 13px; text-align: center;}
-#delete{background: #1a1017; font-size: 13px; width: 99%; display: inline-block; padding-top: 10px; padding-bottom: 13px; text-align: center; color: white;}
-.attended:not(:empty) { position: relative; font-size: 11px; float: left; display: block; font-weight: bold; color: #1a1017; clear: both; background: #9fcd50; margin-bottom: 5px; padding: 10px; margin-top: 10px; }
-.imggridnav{ border: 1px solid #cecece; margin-left: -1px; width:100%; background-color: #EEE;position:fixed; float: left; bottom: 52px;}
-.imggridnav a{font-size: 35px; font-weight: bold; color: #1a1017; padding: 2.5%; width:95%; text-align: center; font-size: 15px;}
-#imagegrid.text-container{margin:0!important;}
-#imagegrid{padding-top: 20px; height: 100%; width: 100%; overflow-y: scroll;}
-#imgcontainer{height: 85.25%; overflow: hidden; position: relative; padding: 0; margin: 0; width:95%; margin-left: 2.5%; margin-right: 2.5%;}
-#imagegrid img{width: 19%; height:auto; }
+.top.button{background: #eee; border: 1px solid #cecece; color: #1c140d; font-size: 40px; width: 49.5%; display: inline-block; padding-top: 1.5rem; padding-bottom: 1.5rem; text-align: center;}
+#delete{background: #eee; border: 1px solid #cecece; color: #1c140d; font-size: 40px; width: 99%; display: inline-block; padding-top: 1.5rem; padding-bottom: 1.5rem; text-align: center;}
+.attended:not(:empty) { position: relative; font-size: 30px; float: left; display: block; font-weight: bold; color: #1c140d; clear: both; background: #cbe86b; margin-bottom: 5px; padding: 15px; margin-top: 10px; }
+.imggridnav{ border: 1px solid #cecece; margin-left: -1px; width:92%; background-color: #EEE; background-image: url(images/btndivider.png); background-repeat: repeat-y; background-position: center;position:fixed; float: left; left:50%; margin-left: -46%; bottom: 94px;}
+.imggridnav a{font-size: 35px; font-weight: bold; color: #1c140d; padding: 2.5%; width:45%; text-align: center;}
+#imagegrid{padding-top: 40px; height: 100%; width: 92.5%; overflow-y: scroll; padding-right: 50px;}
+#imgcontainer{height: 84.3%; overflow: hidden; position: relative; padding: 0; margin: 0;}
+#imagegrid img{width: 19.65%; height:auto; }
 .push { height: 100px; }
-.lesstop{margin-top: 50px!important;}
+.moreright{margin-right: 25px;}
 #clearTag{position: absolute; right: 40px; font-size: 40px;}
-.icon-container { background: transparent!important; width: 75px!important; left: 50%; margin-left: -32.5px; padding-left: 0!important; padding-right: 0!important;  position: relative; float: none; height: 30px;}
-.icon-container a, .icon-container button { position: absolute; bottom: 0; left: 0; font-size: 10pt!important; font-weight: bold!important; width: 100%!important; text-align: center; display: inline-block; line-height: 15px; background: transparent!important }
-span.icon .topplus{font-size: 14px; position: absolute; top: 3px; right: 26.5px;}
-p.simple-date { font-size: 10px; color: gray; clear: both; font-weight: 100; margin: 0; }
-p.event-location { color: #1a1017; clear: both; font-weight: 100; margin: 0; margin-bottom: 7px; font-size: 10px;}
-p.event-location span { color: #1a1017; }
-p.event-synopsis{margin-top: 5px;}
-.icon-container button{padding: 0!important;}
-p.simple-synopsis { clear: both; font-size: 12px; padding-top: 10px;}
-p.event-images a { background: transparent; color: #9fcd50; text-decoration: underline; padding: 0; }
-p span.icon { height: 15px; width: 100%; clear: both; position: relative; float: left; font-size: 15px; color: #1a1017; margin-bottom: 10px;}
-p span.icon.star.mini { font-size: 10px; padding-top: 1px; }
-p span.text { font-size: 10px; width: 100%; display: block; text-align: center; margin: 0; line-height: 14px; position: relative; float: left; color: #1a1017; }
-p.rating { color: #9fcd50; font-size: 13px; margin-top: 5px; }
-.four.icon-container{width: 25%!important; float: left; left:0; margin-left: 0;}
+p.icon-container { position: relative; float: left; height: 60px; padding: 20px; margin-right: 25px;}
+p.icon-container a { font-size: 30pt; font-weight: bold; width: 100%; text-align: center; display: inline-block; line-height: 23px; }
+p.simple-date { font-size: 25px; color: gray; clear: both; font-weight: 100; margin: 0; }
+p.event-location { color: #1c140d; clear: both; font-weight: 100; margin: 0; }
+p.event-location span { color: #1c140d; }
+p.simple-synopsis { clear: both; }
+p.event-images a { background: transparent; color: #cbe86b; text-decoration: underline; padding: 0; }
+p span.icon { height: 35px; width: 100%; clear: both; position: relative; float: left; font-size: 35px; color: #1c140d; margin-bottom: 10px;}
+p span.icon.star { font-size: 27px; padding-top: 1px; }
+p span.text { font-size: 20px; width: 100%; display: block; text-align: center; margin: 0; line-height: 14px; position: relative; float: left; color: #1c140d; }
+p.rating { color: #cbe86b; font-size: 50px; margin-top: 5px; }
+
 span.star ~ span.text { display: block; margin-top: -1px; }
 
+textarea { resize: none; width: 100%; color: #151515; font-size: inherit;}
+
 #ratings { width: 94%; margin-left: 3%; margin-right: 3%; }
-.additional-comments { margin-top: 0px; font-size: 11px;}
+
+.additional-comments { margin-top: 0px; }
 
 #alertError{display: none; z-index: 20000; position: fixed; top: 0; overflow: hidden;}
 #alertError #overlay{position: fixed;height:100%; width: 100%; background: rgba(0,0,0,0.5);}
-#alertError #alertmodal{ position: fixed; background: white; width: 90%; padding: 2%; left: 50%; margin-left: -47%; top: 10%; }
-#alertError #alertmodal p{font-size: 13px;}
+#alertError #alertmodal{ position: fixed; background: white; width: 90%; left: 50%; margin-left: -45%; top: 0px; }
 
-.username { color: gray; font-style: italic; font-size: 10px; }
+.username { color: gray; font-style: italic; font-size: 35px; }
 .less-marginbtm{margin-bottom: 10px;}
-.star { color: #9fcd50; font-size: 20px;}
+.star { color: #cbe86b; font-size: 20px;}
 .star:hover { cursor: pointer; }
 
-#login-form, #signup-form, #forgotPasswordForm { background: #9fcd50;  width: 50%; left: 50%; margin-left: -25%; position: relative; margin-top: 10px;}
+#login-form, #signup-form, #forgotPasswordForm { background: #cbe86b;  width: 50%; left: 50%; margin-left: -25%; position: relative; margin-top: 10px;}
 .form-input { margin-top: 5px; background: white; vertical-align: middle; position: relative; border: 1px #eee solid; padding: .3rem; width: 95%; margin-left: -.15rem;}
-.form-input b{font-size: 10px;}
-p.form-input{margin-top: 5px; padding-top: 0;}
-input { border: 0; -webkit-appearance: none!important; border-radius: 0!important; background: white; border: 0; position: relative; height: 99%; margin: 0; font-size: 12px; outline: none !important; }
-#signup-form input + a {position: absolute; top: 22%; right: 10px; font-size: 12px; color: #1a1017;}
+input { border: 0; background: white !important; border: 0; position: relative; height: 99%; margin: 0; font-size: 12px; outline: none !important; }
+#signup-form input + a {position: absolute; top: 22%; right: 10px; font-size: 12px; color: #1c140d;}
 #login-form input:-webkit-autofill, #signup-form input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 66px white inset; }
-#login-form ~ a { color: #6a4a3c; font-size: 12px; color: #1a1017; width: 65%; left: 50%; margin-left: -32.5%; position: relative; text-align: center; margin-top: 7px;}
-#signup-form ~ a { color: #6a4a3c; font-size: 12px; color: #1a1017; width: 65%; left: 50%; margin-left: -32.5%; position: relative; text-align: center; margin-top: 7px;}
+#login-form ~ a { color: #6a4a3c; font-size: 12px; color: #1c140d; width: 65%; left: 50%; margin-left: -32.5%; position: relative; text-align: center; margin-top: 7px;}
+#signup-form ~ a { color: #6a4a3c; font-size: 12px; color: #1c140d; width: 65%; left: 50%; margin-left: -32.5%; position: relative; text-align: center; margin-top: 7px;}
 #login-form button, #signup-form button, #forgotPasswordForm .btn-submit { font-family: 'Bitter'; position: relative; margin-top: 20px; text-align: center; font-size: 13px; padding: .5rem;}
 
-#removeimgicon{ position: absolute; right: 7px; bottom: -11px; display: inline-block; z-index:201;}
-#removeimgicon a{color: #1a1017; font-size: 11px;}
-/*Style File Upload Hack*/
-#usericonupload{opacity:0; position: absolute; left:0; z-index: 200; height:40px;}
-#iconuploadrestyle{color: white; width: 55px; background: #1a1017; padding-top: 5px; padding-bottom:5px;padding-left:10px;font-size:10px!important;}
-.no-border{border:0!important;}
-
-#profileimg{width: 150px; height:150px; left: 50%; margin-left: -75px; margin-top: 20px; margin-bottom: 20px; background-image: url(/images/blankprofile-2.png); position:relative; border: 1px solid #cecece; background-position: center; background-size: cover;}
-p#usericon {font-size: 50px; width: 100%; text-align: center;}
-#searchbtn{right: 5px; position:absolute; color: #1a1017;}
-
-h3.forms-title { margin: 0; color: #1a1017; padding-top: 10px; font-size: 24px; margin-bottom: 50px; display: block; text-align: center; font-family: 'Bitter'; width: 100%: text-align: center; }
-h3 {font-family: "Bitter", Arial, sans-serif; color: #1a1017; font-size: 30px; margin: 0; text-align: center;}
-.form-style { background: #9fcd50; height: 100%; width: 100%; }
+h3.forms-title { margin: 0; color: #1c140d; padding-top: 60px; margin-bottom: 250px; display: block; text-align: center; font-family: 'Bitter';}
+h3 {font-family: "Bitter", Arial, sans-serif; color: #1c140d; font-size: 30px; margin: 0; text-align: center;}
+.form-style { background: #cbe86b; height: 100%; width: 100%; }
 .form-style .button-container { margin: auto; width: 45%; padding-top: 30%;}
-.form-style a { font-size: 15px; width:100%; font-family: 'Bitter', Arial, sans-serif; font-weight: 700; color: white; background: #1a1017; padding: 10px; padding-left: 0px; padding-right: 0px; text-align: center; display: block; clear: both; margin: auto; margin-top: 7px;}
-input[name="queryval"]{width:90%;}
+.form-style a { font-size: 30px; width:100%; font-family: 'Bitter', Arial, sans-serif; font-weight: 700; color: white; background: #1c140d; padding: 35px; padding-left: 0px; padding-right: 0px; text-align: center; display: block; clear: both; margin: auto; margin-top: 20px;}
 
-.forms { background: #9fcd50; height: 100%; width: 100%; max-width: 100%;}
+.forms { background: #cbe86b; height: 100%; width: 100%; max-width: 100%;}
 .forms form { position: relative; display: block; }
 
-#editaccountForm{ width: 100%;}
+#editaccountForm{ width: 90%;}
 #editaccountForm input{ font-size: 20px;}
 /*# sourceMappingURL=event-rater.css.map */
- li a{color: #1a1017; font-size: 12px; font-weight: bold;}
- li a:visited{color: #1a1017;}
 
 .bigbottom{padding-bottom: 45px;}
 .spacer{height:50px;}
-.small-bottom{padding-top: 10px;}
 
-#footer{ background: #1a1017; position: fixed; bottom: 0; width: 100%;}
+#footer{ background: #1c140d; position: fixed; bottom: 0; width: 100%;}
 #footer a{font-size: 20px; color: white; position: relative; width: 32%; display: inline-block; text-align: center; padding-top: 15px; padding-bottom: 15px;}
 
 .profileimg{width: 100%; height:100%;}
 
-#liststyle{ position: relative; height: 85%; overflow: hidden; margin-top: 50px;}
+#liststyle{ position: relative; height: 85%; overflow: hidden; padding-right:30px; margin-top: 100px;}
 #liststyle ul{height: 100%; overflow-y: scroll; width: 100%;}
